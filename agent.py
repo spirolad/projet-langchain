@@ -6,6 +6,7 @@ from tools.calculs import calculer_interets_composes, calculer_marge, calculer_m
 from tools.api_publique import convertir_devise
 from tools.texte import  extraire_mots_cles, formater_rapport, resumer_texte
 from tools.recommandation import recommander_produits
+from tools.portefeuille import get_networth
 
 tools =[
     # ── Outil 1 : Base de données ─────────────────────────────────────
@@ -48,6 +49,12 @@ tools =[
                      'Entrée : budget,categorie,type_compte ex 300,Informatique,Premium. '
                      'Catégories : Informatique, Mobilier, Audio, Toutes. '
                      'Types : Standard, Premium, VIP.'),
+     # ── Outil 7 : Portefeuille ─────────────────────────────────────
+     Tool(name="portefeuille", func=get_networth,
+          description='Calcul de la valeur cumule de plusieurs actions'
+                      'Entree: SYMBOLE:QUANTITE|SYMBOLE:QUANTITE'
+                      'Sortie: Format pour chaque action: symb quantity = total'
+                      'Derniere ligne: Somme = total_prix')
 ]
 
 def creer_agent():

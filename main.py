@@ -52,6 +52,12 @@ SCENARIOS = {
         "2) Convertis 1000 USD en EUR. "
         "3) Si j'investis 5000€ à 7% pendant 10 ans, quel capital ?"
     ),
+    "9": (
+        "Scénario 9 – Calcul d'un portefeuille d'action",
+        "Calcul la valeur de mon portefeuille:"
+        "1000 actions Apple, 3000 Google, 10000 Nvidia et 30000 TSMC"
+        "Formate correctement le prix en le rendant lissible"
+    ),
 }
 
 

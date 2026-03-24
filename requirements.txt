@@ -5,3 +5,4 @@ langchain-classic==1.0.1
 python-dotenv==1.2.1
 requests
 mysql-connector-python
+yfinance
