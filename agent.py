@@ -8,6 +8,14 @@ from tools.texte import  extraire_mots_cles, formater_rapport, resumer_texte
 from tools.recommandation import recommander_produits
 from tools.portefeuille import get_networth
 from tools.tavily import answer_open_question
+from langchain_experimental.tools import PythonREPLTool
+
+python_repl = PythonREPLTool()
+python_repl.description = (
+     'Exécute du code Python pour des calculs complexes ou traitements '
+     'de données non couverts par les autres outils. '
+     'Entrée : code Python valide sous forme de chaîne.'
+)
 
 tools =[
     # ── Outil 1 : Base de données ─────────────────────────────────────
@@ -60,7 +68,9 @@ tools =[
      Tool(name="tavily", func=answer_open_question,
           description='Permet de répondre à des questions ouvertes comme'
                        'actualités financières, informations sur une entreprise, cours récents non'
-                       'couverts par les autres outils.')
+                       'couverts par les autres outils.'),
+     # ── Outil 9 : PythonREPLTool ─────────────────────────────────────
+     python_repl
 ]
 
 def creer_agent():

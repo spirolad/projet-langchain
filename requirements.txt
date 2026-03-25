@@ -3,6 +3,7 @@ langchain-openai==1.1.10
 langchain-community==0.4.1
 langchain-classic==1.0.1
 python-dotenv==1.2.1
+langchain_experimental
 requests
 mysql-connector-python
 yfinance

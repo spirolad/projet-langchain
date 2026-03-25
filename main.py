@@ -59,10 +59,15 @@ SCENARIOS = {
         "Formate correctement le prix en le rendant lissible"
     ),
     "10": (
-        "Scénario 10 – Permet d'analyser le marché du NASDAQ",
+        "Scénario 10 – Analyse le marché du NASDAQ",
         "Analyse le marché du NASDAQ américain"
         "Choisi un investissement pour 1000000 de dollars en action"
         "L'investissement doit avoir un très fort potentiel et peut comporter des risques"
+    ),
+    "11": (
+        "Scénario 11 - Moyenne variation actions",
+        "Est-ce que tu peux faire la moyenne de variation des actions suivantes:"
+        "APPLE, GOOGLE, NVIDIA et TSMC"
     )
 }
 
