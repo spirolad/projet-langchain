@@ -58,6 +58,12 @@ SCENARIOS = {
         "1000 actions Apple, 3000 Google, 10000 Nvidia et 30000 TSMC"
         "Formate correctement le prix en le rendant lissible"
     ),
+    "10": (
+        "Scénario 10 – Permet d'analyser le marché du NASDAQ",
+        "Analyse le marché du NASDAQ américain"
+        "Choisi un investissement pour 1000000 de dollars en action"
+        "L'investissement doit avoir un très fort potentiel et peut comporter des risques"
+    )
 }
 
 

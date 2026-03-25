@@ -7,6 +7,7 @@ from tools.api_publique import convertir_devise
 from tools.texte import  extraire_mots_cles, formater_rapport, resumer_texte
 from tools.recommandation import recommander_produits
 from tools.portefeuille import get_networth
+from tools.tavily import answer_open_question
 
 tools =[
     # ── Outil 1 : Base de données ─────────────────────────────────────
@@ -54,7 +55,12 @@ tools =[
           description='Calcul de la valeur cumule de plusieurs actions'
                       'Entree: SYMBOLE:QUANTITE|SYMBOLE:QUANTITE'
                       'Sortie: Format pour chaque action: symb quantity = total'
-                      'Derniere ligne: Somme = total_prix')
+                      'Derniere ligne: Somme = total_prix'),
+     # ── Outil 8 : Tavily ─────────────────────────────────────
+     Tool(name="tavily", func=answer_open_question,
+          description='Permet de répondre à des questions ouvertes comme'
+                       'actualités financières, informations sur une entreprise, cours récents non'
+                       'couverts par les autres outils.')
 ]
 
 def creer_agent():
