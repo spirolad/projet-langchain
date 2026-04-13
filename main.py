@@ -68,6 +68,14 @@ SCENARIOS = {
         "Scénario 11 - Moyenne variation actions",
         "Est-ce que tu peux faire la moyenne de variation des actions suivantes:"
         "APPLE, GOOGLE, NVIDIA et TSMC"
+    ),
+    "12": (
+        "Scénario 12 - Démo mémoire (3 questions enchaînées)",
+        [
+            "Quel est le type de compte et le solde du client Marie Dupont ?",
+            "Quel est le prix TTC du produit P001 ?",
+            "En utilisant les deux réponses précédentes, dis si Marie Dupont peut acheter 2 unités de P001 sans dépasser son solde et donne le reste exact."
+        ]
     )
 }
 
@@ -95,8 +103,13 @@ if __name__ == "__main__":
             print("\nAu revoir !")
             break
         elif choix in SCENARIOS:
-            titre, question = SCENARIOS[choix]
+            titre, question_ou_questions = SCENARIOS[choix]
             print(f"\n>>> {titre}")
-            interroger_agent(agent, question)
+            if isinstance(question_ou_questions, list):
+                for i, question in enumerate(question_ou_questions, start=1):
+                    print(f"\n--- Question {i}/3 ---")
+                    interroger_agent(agent, question)
+            else:
+                interroger_agent(agent, question_ou_questions)
         else:
-            print(f"\n  Choix invalide '{choix}'. Entrez un numéro entre 1 et 8, ou 'quit'.")
+            print(f"\n  Choix invalide '{choix}'. Entrez un numéro de scénario valide, ou 'quit'.")

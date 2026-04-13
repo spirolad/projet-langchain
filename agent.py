@@ -76,8 +76,9 @@ tools =[
 def creer_agent():
     """Crée et retourne un agent LangChain configuré."""
     from langchain_openai import ChatOpenAI
-    from langchain_classic.agents import AgentExecutor, create_react_agent
-    from langchain_classic import hub
+    from langchain_classic.agents import AgentExecutor, create_openai_tools_agent
+    from langchain_classic.memory import ConversationBufferMemory
+    from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
     import os
 
     # Initialisation du LLM
@@ -86,17 +87,34 @@ def creer_agent():
         temperature=0,           # 0 = déterministe (résultats reproductibles)
         openai_api_key=os.getenv('OPENAI_API_KEY')
     )
-    # Chargement du prompt ReAct depuis le hub LangChain
-    # Ce prompt enseigne au LLM le cycle Thought → Action → Observation
-    prompt = hub.pull("hwchase17/react")
+    # Prompt chat-compatible pour OpenAI Tools + historique conversationnel.
+    prompt = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            "Tu es un assistant financier précis et concis. "
+            "Utilise les outils quand nécessaire et réutilise l'historique de conversation."
+        ),
+        MessagesPlaceholder(variable_name="chat_history"),
+        ("human", "{input}"),
+        MessagesPlaceholder(variable_name="agent_scratchpad"),
+    ])
 
-    # Création de l'agent avec la stratégie ReAct
-    agent = create_react_agent(llm=llm, tools=tools, prompt=prompt)
+    # Mémoire courte conversationnelle partagée entre les tours.
+    memory = ConversationBufferMemory(
+        memory_key="chat_history",
+        input_key="input",
+        output_key="output",
+        return_messages=True,
+    )
+
+    # Création de l'agent avec la stratégie OpenAI Tools.
+    agent = create_openai_tools_agent(llm=llm, tools=tools, prompt=prompt)
 
     # Création de l'exécuteur
     agent_executor = AgentExecutor(
         agent=agent,
         tools=tools,
+        memory=memory,
         verbose=True,            # Affiche le raisonnement étape par étape
         max_iterations=10,       # Évite les boucles infinies
         handle_parsing_errors=True
